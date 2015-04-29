@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:src="@drawable/Fourviere"/>
+        android:src="@drawable/powered_by_google_dark"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
-            android:src="@drawable/Fleche-verte"/>
+            android:src="@android:drawable/arrow_up_float"/>
 
         <TextView
             android:layout_width="wrap_content"

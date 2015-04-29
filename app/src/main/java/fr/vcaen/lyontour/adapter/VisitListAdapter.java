@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,9 +50,10 @@ public class VisitListAdapter extends ArrayAdapter<PointInteret> {
             PointInteretView piv =  new PointInteretView(getContext());
             piv.setPointIntert(getItem(position));
             LinearLayout wrapper = new LinearLayout(getContext());
-            wrapper.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wrapper.setLayoutParams(new AbsListView.LayoutParams(parent.getWidth(), AbsListView.LayoutParams.WRAP_CONTENT));
             wrapper.setOrientation(LinearLayout.VERTICAL);
             wrapper.setGravity(Gravity.CENTER);
+            wrapper.setPadding(10,0,10,0);
             wrapper.addView(piv);
             if( position < getCount() - 1) {
                 wrapper.addView(connector);

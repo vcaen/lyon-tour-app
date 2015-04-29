@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="activitybackground" type="color">#121212</item>
+    <item name="carddarkforground" type="color">#191919</item>
+
+
+
+</resources> 

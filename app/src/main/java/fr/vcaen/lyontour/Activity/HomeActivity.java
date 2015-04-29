@@ -133,11 +133,14 @@ public class HomeActivity extends ActionBarActivity {
 
                 };
                 if(v.getId() == R.id.date_depart) {
-                    Date infiniteDate = new Date("31/12/3000");
-                    builder.dateRange(dateA.getTime(), infiniteDate.getTime());
+                    Calendar infiniteDate = Calendar.getInstance();
+                    infiniteDate.set(3000, 12, 31);
+                    builder.dateRange(dateA.getTime(), infiniteDate.getTimeInMillis());
                 } else {
-                    Date startDate = new Date("01/01/1970");
-                    builder.dateRange(startDate.getTime(), dateD.getTime());
+
+                    Calendar startDate = Calendar.getInstance();
+                    startDate.set(1970,1,1);
+                    builder.dateRange(startDate.getTimeInMillis(), dateD.getTime());
                 }
                 builder.positiveAction("OK")
                         .negativeAction("ANNULER");
