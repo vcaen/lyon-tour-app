@@ -6,4 +6,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="date_arrivee">Début du séjour</string>
+    <string name="date_depart">Fin du séjour</string>
+    <string name="arrivee">Arrivée le</string>
+    <string name="depart">Depart le</string>
 </resources>
