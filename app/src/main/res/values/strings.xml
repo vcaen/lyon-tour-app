@@ -6,4 +6,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_pointdinteret_list">Points d\'interets</string>
+    <string name="title_pointdinteret_detail">Point d\'interet Detail</string>
 </resources>

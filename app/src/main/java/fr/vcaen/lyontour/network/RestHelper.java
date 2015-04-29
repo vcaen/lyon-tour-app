@@ -1,6 +1,8 @@
 package fr.vcaen.lyontour.network;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,6 +30,7 @@ public class RestHelper {
     
 
     private RequestQueue queue;
+    private ImageLoader imageLoader;
 
     public static RestHelper getInstance(Context context) {
         if(instance == null) {
@@ -38,6 +42,15 @@ public class RestHelper {
     private RestHelper(Context context) {
         mContext = context;
         queue = Volley.newRequestQueue(context);
+        imageLoader = new ImageLoader(this.queue, new ImageLoader.ImageCache() {
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            public void putBitmap(String url, Bitmap bitmap) {
+                mCache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return mCache.get(url);
+            }
+        });
     }
 
 
@@ -74,5 +87,7 @@ public class RestHelper {
         };
     }
 
-
+    public ImageLoader getImageLoader() {
+        return imageLoader;
+    }
 }

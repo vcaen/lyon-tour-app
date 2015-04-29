@@ -28,18 +28,28 @@
         <activity
             android:name=".Activity.MapsActivity"
             android:label="@string/title_activity_maps" >
-
         </activity>
         <activity
             android:name=".Activity.HomeActivity"
-            android:label="@string/title_activity_home">
-
+            android:label="@string/title_activity_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".Activity.PointdinteretListActivity"
+            android:label="@string/title_pointdinteret_list"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Activity.PointdinteretDetailActivity"
+            android:label="@string/title_pointdinteret_detail"
+            android:parentActivityName=".Activity.PointdinteretListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.vcaen.lyontour.Activity.PointdinteretListActivity" />
         </activity>
     </application>
 
