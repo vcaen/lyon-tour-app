@@ -1,48 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:gravity="center">
-    <LinearLayout
-        android:layout_width="fill_parent"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:src="@drawable/Fourviere"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:src="@drawable/Fleche-verte"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/arrivee"
-            android:gravity="center"
-            />
-        <Button
+            android:textStyle="bold"
+            android:textColor="#FF0000"
+            android:gravity="center"/>
+        <info.hoang8f.widget.FButton
             android:id="@+id/date_arrivee"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/date_arrivee"
-            />
-    </LinearLayout>
+            fbutton:buttonColor="@color/fbutton_color_concrete"
+            fbutton:shadowColor="@color/fbutton_color_asbestos"/>
+
+    </RelativeLayout>
+
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/depart"
-            android:gravity="center"
-            />
+            android:textStyle="bold"
+            android:textColor="#FF0000"
+            android:gravity="center"/>
         <Button
             android:id="@+id/date_depart"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/date_depart"
-            />
+            android:text="@string/date_depart"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/valider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/valider"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>

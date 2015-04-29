@@ -1,5 +1,6 @@
 package fr.vcaen.lyontour.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,8 +115,6 @@ public class HomeActivity extends ActionBarActivity {
                             dateD.setTime(dialog.getDate());
                         else
                             dateA.setTime(dialog.getDate());
-                        Log.d("HomeActivity", "dateA = " + dateA);
-                        Log.d("HomeActivity", "dateD = " + dateD);
                         if(v.getId() == R.id.date_depart &&  dateD.compareTo(dateA) == -1){
                             buttonD.setText("Fin du séjour");
                             Toast.makeText(getApplicationContext(), "Votre date de départ est antérieure à votre date d'arrivée", Toast.LENGTH_SHORT).show();
@@ -149,5 +148,15 @@ public class HomeActivity extends ActionBarActivity {
 
         buttonD.setOnClickListener(clickListener);
         buttonA.setOnClickListener(clickListener);
+
+        final Button buttonValider = (Button) findViewById(R.id.valider);
+        buttonValider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent listActivity = new Intent(HomeActivity.this, PointdinteretListActivity.class);
+                startActivity(listActivity);
+                Log.d("HomeActivity", "bouton valide clique");
+            }
+        });
     }
 }
