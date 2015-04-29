@@ -2,16 +2,29 @@ package fr.vcaen.lyontour.Activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.rey.material.app.DatePickerDialog;
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import fr.vcaen.lyontour.R;
+import fr.vcaen.lyontour.fragments.CalendarDialog;
 import fr.vcaen.lyontour.network.RestHelper;
 
 public class HomeActivity extends ActionBarActivity {
@@ -48,18 +61,93 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final TextView tv = (TextView) findViewById(R.id.text_hello_world);
+        final Date dateA = new Date();
+        final Date dateD = new Date();
+        final Button buttonA = (Button) findViewById(R.id.date_arrivee);
+        final Button buttonD = (Button) findViewById(R.id.date_depart);
 
-        RestHelper.getInstance(this).getJsonObject("", new Response.Listener<JSONObject>() {
+       /* buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                try {
-                    tv.setText(jsonObject.toString(4));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onClick(View v) {
+                Dialog.Builder builder = new DatePickerDialog.Builder() {
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+                        DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
+                        String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                        buttonA.setText(date);
+                        String dA = buttonA.getText().toString();
+                        try {
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+                            dateA.setTime(sdf.parse(dA).getTime());
+                        } catch (java.text.ParseException e) {
+                            e.printStackTrace();
+                        }
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(fragment.getDialog().getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                builder.positiveAction("OK")
+                        .negativeAction("ANNULER");
+
+                DialogFragment fragment = DialogFragment.newInstance(builder);
+                fragment.show(getSupportFragmentManager(), null);
             }
         });
+*/
 
+        final View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                DatePickerDialog.Builder builder = new DatePickerDialog.Builder() {
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+                        DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
+                        String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                        ((Button) v).setText(date);
+                        if(v.getId() == R.id.date_depart)
+                            dateD.setTime(dialog.getDate());
+                        else
+                            dateA.setTime(dialog.getDate());
+                        Log.d("HomeActivity", "dateA = " + dateA);
+                        Log.d("HomeActivity", "dateD = " + dateD);
+                        if(v.getId() == R.id.date_depart &&  dateD.compareTo(dateA) == -1){
+                            buttonD.setText("Fin du séjour");
+                            Toast.makeText(getApplicationContext(), "Votre date de départ est antérieure à votre date d'arrivée", Toast.LENGTH_SHORT).show();
+                        }
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(fragment.getDialog().getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+
+
+
+
+                };
+                if(v.getId() == R.id.date_depart) {
+                    Date infiniteDate = new Date("31/12/3000");
+                    builder.dateRange(dateA.getTime(), infiniteDate.getTime());
+                } else {
+                    Date startDate = new Date("01/01/1970");
+                    builder.dateRange(startDate.getTime(), dateD.getTime());
+                }
+                builder.positiveAction("OK")
+                        .negativeAction("ANNULER");
+                DialogFragment fragment = DialogFragment.newInstance(builder);
+                fragment.show(getSupportFragmentManager(), null);
+
+            }};
+
+        buttonD.setOnClickListener(clickListener);
+        buttonA.setOnClickListener(clickListener);
     }
 }
