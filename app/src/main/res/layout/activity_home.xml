@@ -9,54 +9,66 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:src="@drawable/Fourviere"/>
+        android:src="@drawable/fourviere"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="0.05">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:src="@drawable/Fleche-verte"/>
+            android:id="@+id/flecheVerte"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/flechearrivee"
+            android:layout_alignParentLeft="true"/>
 
         <TextView
+            android:id="@+id/arrivee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/arrivee"
             android:textStyle="bold"
             android:textColor="#FF0000"
-            android:gravity="center"/>
-        <info.hoang8f.widget.FButton
+            android:layout_toRightOf="@id/flecheVerte"/>
+        <TextView
             android:id="@+id/date_arrivee"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date_arrivee"
-            fbutton:buttonColor="@color/fbutton_color_concrete"
-            fbutton:shadowColor="@color/fbutton_color_asbestos"/>
+            android:layout_toRightOf="@id/flecheVerte"
+            android:layout_below="@id/arrivee"/>
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="0.05">
+
+        <ImageView
+            android:id="@+id/flecheRouge"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/flechearrivee"
+            android:layout_alignParentLeft="true"/>
 
         <TextView
+            android:id="@+id/depart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/depart"
             android:textStyle="bold"
             android:textColor="#FF0000"
-            android:gravity="center"/>
-        <Button
+            android:layout_toRightOf="@id/flecheRouge"/>
+        <TextView
             android:id="@+id/date_depart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/date_depart"/>
-    </LinearLayout>
+            android:text="@string/date_depart"
+            android:layout_toRightOf="@id/flecheRouge"
+            android:layout_below="@id/depart"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/valider"

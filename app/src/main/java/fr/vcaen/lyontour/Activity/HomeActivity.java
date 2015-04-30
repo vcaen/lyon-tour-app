@@ -64,8 +64,8 @@ public class HomeActivity extends ActionBarActivity {
         super.onStart();
         final Date dateA = new Date();
         final Date dateD = new Date();
-        final Button buttonA = (Button) findViewById(R.id.date_arrivee);
-        final Button buttonD = (Button) findViewById(R.id.date_depart);
+        final TextView buttonA = (TextView) findViewById(R.id.date_arrivee);
+        final TextView buttonD = (TextView) findViewById(R.id.date_depart);
 
        /* buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +110,7 @@ public class HomeActivity extends ActionBarActivity {
                     public void onPositiveActionClicked(DialogFragment fragment) {
                         DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        ((Button) v).setText(date);
+                        ((TextView) v).setText(date);
                         if(v.getId() == R.id.date_depart)
                             dateD.setTime(dialog.getDate());
                         else

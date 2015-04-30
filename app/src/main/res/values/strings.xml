@@ -12,4 +12,5 @@
     <string name="date_depart">Fin du séjour</string>
     <string name="arrivee">Arrivée le</string>
     <string name="depart">Depart le</string>
+    <string name="valider">Valider</string>
 </resources>
