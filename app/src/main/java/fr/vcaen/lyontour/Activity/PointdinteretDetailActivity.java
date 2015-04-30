@@ -1,6 +1,7 @@
 package fr.vcaen.lyontour.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
@@ -27,6 +28,9 @@ public class PointdinteretDetailActivity extends ActionBarActivity {
 
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(
+                getResources().getColor(R.color.rouge)
+        ));
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

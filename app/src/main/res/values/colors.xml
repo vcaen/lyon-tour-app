@@ -4,5 +4,8 @@
     <item name="activitybackground" type="color">#121212</item>
     <item name="carddarkforground" type="color">#191919</item>
     <item name="rouge" type="color">#b82923</item>
+    <item name="card_text_color" type="color">#ffd8d8d8</item>
+
+
 
 </resources> 

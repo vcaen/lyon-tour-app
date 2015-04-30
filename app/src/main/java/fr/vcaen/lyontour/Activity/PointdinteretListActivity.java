@@ -3,7 +3,7 @@ package fr.vcaen.lyontour.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-
+import android.support.v7.app.ActionBarActivity;
 
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.fragments.PointdinteretDetailFragment;
@@ -25,7 +25,7 @@ import fr.vcaen.lyontour.fragments.PointdinteretListFragment;
  * {@link fr.vcaen.lyontour.fragments.PointdinteretListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class PointdinteretListActivity extends FragmentActivity
+public class PointdinteretListActivity extends ActionBarActivity
         implements PointdinteretListFragment.Callbacks {
 
     /**
@@ -38,7 +38,8 @@ public class PointdinteretListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pointdinteret_list);
-
+        //getActionBar().setTitle(getString(R.string.votre_programme));
+        //getActionBar().show();
         if (findViewById(R.id.pointdinteret_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and

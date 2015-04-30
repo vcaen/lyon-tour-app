@@ -2,7 +2,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/activitybackground</item>
+        <item name="android:colorBackground">@color/activitybackground</item>
+
     </style>
+
+    <style name="RedActionBarActivity" parent="@style/AppTheme">
+        <item name="android:actionBarStyle">@style/RedActionBar</item>
+    </style>
+
+    <style name="RedActionBar" parent="@style/AppTheme">
+        <item name="android:background">@color/rouge</item>
+    </style>
+
+
 
 </resources>

@@ -7,9 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
+
 import fr.vcaen.lyontour.R;
 
 import fr.vcaen.lyontour.Activity.dummy.DummyContent;
+import fr.vcaen.lyontour.models.PointInteret;
+import fr.vcaen.lyontour.models.containers.VisiteContainer;
+import fr.vcaen.lyontour.network.RestHelper;
 
 /**
  * A fragment representing a single Point d'interet detail screen.
@@ -27,7 +32,7 @@ public class PointdinteretDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private PointInteret mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +49,7 @@ public class PointdinteretDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = VisiteContainer.PI_MAP.get(getArguments().getString(ARG_ITEM_ID));
         }
     }
 
@@ -55,7 +60,11 @@ public class PointdinteretDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.pointdinteret_detail)).setText(mItem.content);
+            ((TextView) rootView.findViewById(R.id.attraction_detail_title)).setText(mItem.getTitle());
+            NetworkImageView image = (NetworkImageView) rootView.findViewById(R.id.attraction_detail_image);
+            image.setImageUrl(
+                mItem.getImageURL(),
+                RestHelper.getInstance(getActivity()).getImageLoader());
         }
 
         return rootView;
