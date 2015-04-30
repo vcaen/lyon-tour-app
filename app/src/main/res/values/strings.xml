@@ -11,7 +11,7 @@
     <string name="date_arrivee">Début du séjour</string>
     <string name="date_depart">Fin du séjour</string>
     <string name="arrivee">Arrivée le</string>
-    <string name="depart">Depart le</string>
+    <string name="depart">Départ le</string>
     <string name="valider">Valider</string>
     <string name="complete">Complete</string>
     <string name="error">Erreur</string>
