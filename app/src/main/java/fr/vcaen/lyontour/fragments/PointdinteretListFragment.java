@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import fr.vcaen.lyontour.Activity.dummy.DummyContent;
+import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
 
@@ -73,6 +74,7 @@ public class PointdinteretListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         setListAdapter(new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST));
+
     }
 
     @Override
@@ -84,6 +86,7 @@ public class PointdinteretListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+        getView().getRootView().setBackgroundResource(R.color.activitybackground);
     }
 
     @Override

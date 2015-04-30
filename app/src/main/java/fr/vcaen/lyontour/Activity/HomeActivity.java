@@ -62,45 +62,12 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final Date dateA = new Date();
-        final Date dateD = new Date();
+        final Calendar dateA = Calendar.getInstance();
+        final Calendar dateD = Calendar.getInstance();
+        dateD.set(3000, 12, 31);
         final TextView buttonA = (TextView) findViewById(R.id.date_arrivee);
         final TextView buttonD = (TextView) findViewById(R.id.date_depart);
 
-       /* buttonA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog.Builder builder = new DatePickerDialog.Builder() {
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment) {
-                        DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
-                        String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        buttonA.setText(date);
-                        String dA = buttonA.getText().toString();
-                        try {
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-                            dateA.setTime(sdf.parse(dA).getTime());
-                        } catch (java.text.ParseException e) {
-                            e.printStackTrace();
-                        }
-                        super.onPositiveActionClicked(fragment);
-                    }
-
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment) {
-                        Toast.makeText(fragment.getDialog().getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                builder.positiveAction("OK")
-                        .negativeAction("ANNULER");
-
-                DialogFragment fragment = DialogFragment.newInstance(builder);
-                fragment.show(getSupportFragmentManager(), null);
-            }
-        });
-*/
 
         final View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -112,9 +79,9 @@ public class HomeActivity extends ActionBarActivity {
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
                         ((TextView) v).setText(date);
                         if(v.getId() == R.id.date_depart)
-                            dateD.setTime(dialog.getDate());
+                            dateD.setTimeInMillis(dialog.getDate());
                         else
-                            dateA.setTime(dialog.getDate());
+                            dateA.setTimeInMillis(dialog.getDate());
                         if(v.getId() == R.id.date_depart &&  dateD.compareTo(dateA) == -1){
                             buttonD.setText("Fin du séjour");
                             Toast.makeText(getApplicationContext(), "Votre date de départ est antérieure à votre date d'arrivée", Toast.LENGTH_SHORT).show();
@@ -133,11 +100,13 @@ public class HomeActivity extends ActionBarActivity {
 
                 };
                 if(v.getId() == R.id.date_depart) {
-                    Date infiniteDate = new Date("31/12/3000");
-                    builder.dateRange(dateA.getTime(), infiniteDate.getTime());
+                    Calendar infiniteDate = Calendar.getInstance();
+                    infiniteDate.set(3000, 12, 31);
+                    builder.dateRange(dateA.getTimeInMillis(), infiniteDate.getTimeInMillis());
                 } else {
-                    Date startDate = new Date("01/01/1970");
-                    builder.dateRange(startDate.getTime(), dateD.getTime());
+
+                    Calendar startDate = Calendar.getInstance();
+                    builder.dateRange(startDate.getTimeInMillis(), dateD.getTimeInMillis());
                 }
                 builder.positiveAction("OK")
                         .negativeAction("ANNULER");

@@ -13,4 +13,6 @@
     <string name="arrivee">Arrivée le</string>
     <string name="depart">Depart le</string>
     <string name="valider">Valider</string>
+    <string name="complete">Complete</string>
+    <string name="error">Erreur</string>
 </resources>

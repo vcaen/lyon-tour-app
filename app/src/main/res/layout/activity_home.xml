@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,73 +9,106 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:src="@drawable/fourviere"/>
+        android:layout_weight="2"
+        android:scaleType="centerCrop"
+        android:src="@drawable/grandlyon" />
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.05">
+        android:layout_weight="0.5"
+        card_view:cardBackgroundColor="@color/material_blue_grey_950"
+        card_view:cardCornerRadius="5dp">
 
-        <ImageView
-            android:id="@+id/flecheVerte"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/flechearrivee"
-            android:layout_alignParentLeft="true"/>
-
-        <TextView
-            android:id="@+id/arrivee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arrivee"
-            android:textStyle="bold"
-            android:textColor="#FF0000"
-            android:layout_toRightOf="@id/flecheVerte"/>
-        <TextView
-            android:id="@+id/date_arrivee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_arrivee"
-            android:layout_toRightOf="@id/flecheVerte"
-            android:layout_below="@id/arrivee"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05">
-
-        <ImageView
-            android:id="@+id/flecheRouge"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/flechearrivee"
-            android:layout_alignParentLeft="true"/>
-
-        <TextView
-            android:id="@+id/depart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/depart"
-            android:textStyle="bold"
-            android:textColor="#FF0000"
-            android:layout_toRightOf="@id/flecheRouge"/>
-        <TextView
-            android:id="@+id/date_depart"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/date_depart"
-            android:layout_toRightOf="@id/flecheRouge"
-            android:layout_below="@id/depart"/>
-    </RelativeLayout>
+            android:layout_height="match_parent">
 
-    <Button
+            <ImageView
+                android:id="@+id/flecheArrivee"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_debug_step_into_white_36dp" />
+
+            <TextView
+                android:id="@+id/arrivee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/flecheArrivee"
+                android:text="@string/arrivee"
+                android:textColor="#ffebeb"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/date_arrivee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/arrivee"
+                android:layout_toRightOf="@id/flecheArrivee"
+                android:text="@string/date_arrivee"
+                android:textColor="#ffebeb"
+                android:textSize="30sp"
+                android:gravity="center|left"
+                android:fontFamily="sans-serif-condensed"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        card_view:cardBackgroundColor="@color/material_blue_grey_950"
+        card_view:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/flecheDepart"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_debug_step_out_white_36dp" />
+
+            <TextView
+                android:id="@+id/depart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/flecheDepart"
+                android:text="@string/depart"
+                android:textColor="#ffebeb"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/date_depart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/depart"
+                android:layout_toRightOf="@id/flecheDepart"
+                android:text="@string/date_depart"
+                android:textColor="#ffebeb"
+                android:textSize="30sp"
+                android:gravity="center|left"
+                android:fontFamily="sans-serif-condensed"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <com.dd.CircularProgressButton
         android:id="@+id/valider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/valider"
-        android:layout_gravity="bottom"/>
+        android:textColor="#ffebeb"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_weight="0.05"
+        app:cpb_cornerRadius="10dp"
+        app:cpb_textComplete="@string/complete"
+        app:cpb_textError="@string/error"
+        app:cpb_textIdle="@string/valider"
+        card_view:cpb_selectorIdle="@color/rouge"/>
 
 </LinearLayout>
