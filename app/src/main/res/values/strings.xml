@@ -15,4 +15,6 @@
     <string name="valider">Valider</string>
     <string name="complete">Complete</string>
     <string name="error">Erreur</string>
+    <string name="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae libero turpis. Etiam id porttitor diam. Mauris diam mauris, feugiat sed elit non, lacinia lobortis urna. In at interdum justo, ut posuere metus. Proin sit amet imperdiet augue, in placerat ligula. Aliquam erat volutpat. Sed suscipit mi ligula, vel consectetur eros lobortis faucibus. Mauris pellentesque lacinia diam, nec mollis massa sollicitudin vel.</string>
+    <string name="votre_programme">Votre Programme</string>
 </resources>

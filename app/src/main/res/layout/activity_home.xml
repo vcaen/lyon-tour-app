@@ -60,7 +60,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         card_view:cardBackgroundColor="@color/material_blue_grey_950"
-        card_view:cardCornerRadius="5dp">
+        card_view:cardCornerRadius="5dp"
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -105,10 +106,11 @@
         android:textSize="30sp"
         android:fontFamily="sans-serif-condensed"
         android:layout_weight="0.05"
-        app:cpb_cornerRadius="10dp"
+        app:cpb_cornerRadius="2dp"
         app:cpb_textComplete="@string/complete"
         app:cpb_textError="@string/error"
         app:cpb_textIdle="@string/valider"
         app:cpb_selectorIdle="@drawable/validate_button_selector"/>
+        android:layout_margin="4dp"/>
 
 </LinearLayout>
