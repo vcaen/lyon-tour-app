@@ -38,6 +38,9 @@ public class VisitListAdapter extends ArrayAdapter<PointInteret> {
         super(context, resource, objects);
     }
 
+    public String getItemStringId(int position) {
+        return getItem(position).getId();
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

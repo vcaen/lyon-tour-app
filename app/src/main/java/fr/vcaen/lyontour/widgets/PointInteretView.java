@@ -53,7 +53,6 @@ public class PointInteretView extends FrameLayout {
         setTitle(pi.getTitle());
         setDescription(pi.getDescription());
         image.setImageUrl(pi.getImageURL(), RestHelper.getInstance(getContext()).getImageLoader());
-
     }
 
     public void setImage(Bitmap image) {

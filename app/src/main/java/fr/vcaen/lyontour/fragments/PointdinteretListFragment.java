@@ -3,14 +3,21 @@ package fr.vcaen.lyontour.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
+
+import java.util.List;
+
 import fr.vcaen.lyontour.Activity.dummy.DummyContent;
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
+import fr.vcaen.lyontour.models.PointInteret;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
+import fr.vcaen.lyontour.network.RestHelper;
 
 /**
  * A list fragment representing a list of Points d'interets. This fragment
@@ -22,6 +29,9 @@ import fr.vcaen.lyontour.models.containers.VisiteContainer;
  * interface.
  */
 public class PointdinteretListFragment extends ListFragment {
+
+    private static final String TAG = PointdinteretListFragment.class.getName();
+
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -73,7 +83,19 @@ public class PointdinteretListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setListAdapter(new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST));
+        RestHelper.getInstance(getActivity()).getAttractions("02042014","08042014", new RestHelper.APICallBack<List<PointInteret>>() {
+            @Override
+            public void response(List<PointInteret> object) {
+                VisiteContainer.addAll(object);
+                setListAdapter(new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST));
+            }
+
+            @Override
+            public void error(VolleyError error) {
+                Log.d(TAG, ""+error.getMessage());
+            }
+        });
+
 
     }
 
@@ -115,7 +137,7 @@ public class PointdinteretListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(String.valueOf(getListAdapter().getItemId(position)));
+        mCallbacks.onItemSelected(String.valueOf(((VisitListAdapter)getListAdapter()).getItemStringId(position)));
     }
 
     @Override

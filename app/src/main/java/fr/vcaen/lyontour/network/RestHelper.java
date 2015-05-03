@@ -14,18 +14,29 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.vcaen.lyontour.R;
+import fr.vcaen.lyontour.models.PointInteret;
 
 /**
  * Created by vcaen on 27/04/15.
  */
 public class RestHelper {
+
     
     public static final String TAG = RestHelper.class.getName();
     private static RestHelper instance;
     private Context mContext;
+
+    public static final String ENDPOINT_ATTRACTION = "attraction";
+    public static final String ENDPOINT_PHOTO = "photo/";
+
 
     
 
@@ -54,6 +65,41 @@ public class RestHelper {
     }
 
 
+
+    public void getAttractions(String dateDebut, String dateFin, final APICallBack<List<PointInteret>> callback) {
+        String url =  ENDPOINT_ATTRACTION + "?datedebut="+dateDebut+"&datefin="+dateFin;
+        getJsonObject(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            JSONArray array = jsonObject.getJSONArray("PI");
+                            ArrayList<PointInteret> pis = new ArrayList<PointInteret>();
+                            for(int i = 0; i < array.length(); i++) {
+                                JSONObject pi = array.getJSONObject(i);
+                                pis.add(new PointInteret(
+                                        pi.getString("foursquare_id"),
+                                        pi.getString("name"),
+                                        NetworkConfiguration.SERVER_FULL_ADDRESS + ENDPOINT_PHOTO + pi.getString("photo"),
+                                        pi.getString("description")
+                                ));
+                            }
+                            callback.response(pis);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.error(error);
+                    }
+                },
+                ENDPOINT_ATTRACTION
+        );
+    }
 
 
     /**
@@ -89,5 +135,10 @@ public class RestHelper {
 
     public ImageLoader getImageLoader() {
         return imageLoader;
+    }
+
+    public interface APICallBack<T> {
+        public void response(T object);
+        public void error(VolleyError error);
     }
 }
