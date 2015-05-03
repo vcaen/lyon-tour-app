@@ -61,6 +61,7 @@ public class PointdinteretDetailFragment extends Fragment {
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.attraction_detail_title)).setText(mItem.getTitle());
+            ((TextView) rootView.findViewById(R.id.attraction_detail_description)).setText(mItem.getDescription());
             NetworkImageView image = (NetworkImageView) rootView.findViewById(R.id.attraction_detail_image);
             image.setImageUrl(
                 mItem.getImageURL(),
