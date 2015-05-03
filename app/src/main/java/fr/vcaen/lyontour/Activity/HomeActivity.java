@@ -7,26 +7,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
+import com.dd.CircularProgressButton;
 import com.rey.material.app.DatePickerDialog;
-import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import fr.vcaen.lyontour.R;
-import fr.vcaen.lyontour.fragments.CalendarDialog;
-import fr.vcaen.lyontour.network.RestHelper;
 
 public class HomeActivity extends ActionBarActivity {
 
@@ -59,14 +49,27 @@ public class HomeActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    boolean dateDepartChoisie = false;
+    boolean dateArriveeChoisie = false;
+
+    public void setDateDepartChoisie(boolean dateChoisie) {
+        this.dateDepartChoisie = dateChoisie;
+    }
+
+    public void setDateArriveeChoisie(boolean dateChoisie) {
+        this.dateArriveeChoisie = dateChoisie;
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         final Calendar dateA = Calendar.getInstance();
         final Calendar dateD = Calendar.getInstance();
         dateD.set(3000, 12, 31);
-        final TextView buttonA = (TextView) findViewById(R.id.date_arrivee);
-        final TextView buttonD = (TextView) findViewById(R.id.date_depart);
+        final TextView dateArrivee = (TextView) findViewById(R.id.date_arrivee);
+        final TextView dateDepart = (TextView) findViewById(R.id.date_depart);
+        final CircularProgressButton buttonValider = (CircularProgressButton) findViewById(R.id.valider);
+        buttonValider.setEnabled(false);
 
 
         final View.OnClickListener clickListener = new View.OnClickListener() {
@@ -78,20 +81,19 @@ public class HomeActivity extends ActionBarActivity {
                         DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
                         ((TextView) v).setText(date);
-                        if(v.getId() == R.id.date_depart)
+                        if(v.getId() == R.id.date_depart) {
                             dateD.setTimeInMillis(dialog.getDate());
-                        else
+                            setDateDepartChoisie(true);
+                        }else {
                             dateA.setTimeInMillis(dialog.getDate());
-                        if(v.getId() == R.id.date_depart &&  dateD.compareTo(dateA) == -1){
-                            buttonD.setText("Fin du séjour");
-                            Toast.makeText(getApplicationContext(), "Votre date de départ est antérieure à votre date d'arrivée", Toast.LENGTH_SHORT).show();
+                            setDateArriveeChoisie(true);
                         }
+                        buttonValider.setEnabled(dateArriveeChoisie && dateDepartChoisie);
                         super.onPositiveActionClicked(fragment);
                     }
 
                     @Override
                     public void onNegativeActionClicked(DialogFragment fragment) {
-                        Toast.makeText(fragment.getDialog().getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
                         super.onNegativeActionClicked(fragment);
                     }
 
@@ -115,10 +117,9 @@ public class HomeActivity extends ActionBarActivity {
 
             }};
 
-        buttonD.setOnClickListener(clickListener);
-        buttonA.setOnClickListener(clickListener);
+        dateDepart.setOnClickListener(clickListener);
+        dateArrivee.setOnClickListener(clickListener);
 
-        final Button buttonValider = (Button) findViewById(R.id.valider);
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
