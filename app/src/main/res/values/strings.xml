@@ -8,8 +8,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_pointdinteret_list">Points d\'interets</string>
     <string name="title_pointdinteret_detail">Point d\'interet Detail</string>
-    <string name="date_arrivee">Début du séjour</string>
-    <string name="date_depart">Fin du séjour</string>
+    <string name="date_arrivee">Ma date d arrivée</string>
+    <string name="date_depart">Ma date de départ</string>
     <string name="arrivee">Arrivée le</string>
     <string name="depart">Départ le</string>
     <string name="valider">Valider</string>
@@ -17,4 +17,7 @@
     <string name="error">Erreur</string>
     <string name="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae libero turpis. Etiam id porttitor diam. Mauris diam mauris, feugiat sed elit non, lacinia lobortis urna. In at interdum justo, ut posuere metus. Proin sit amet imperdiet augue, in placerat ligula. Aliquam erat volutpat. Sed suscipit mi ligula, vel consectetur eros lobortis faucibus. Mauris pellentesque lacinia diam, nec mollis massa sollicitudin vel.</string>
     <string name="votre_programme">Votre Programme</string>
+    <string name="vos_preferences">Vos préférences</string>
+    <string name="annuler">Annuler</string>
+    <string name="bouton_preference">Mes préférences</string>
 </resources>
