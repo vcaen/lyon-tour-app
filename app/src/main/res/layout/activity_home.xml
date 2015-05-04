@@ -50,7 +50,6 @@
                 android:text="@string/date_arrivee"
                 android:textColor="@color/gris"
                 android:textSize="30sp"
-                android:textStyle="italic"
                 android:gravity="center|left"
                 android:fontFamily="sans-serif-condensed"/>
 
@@ -94,7 +93,6 @@
                 android:layout_toRightOf="@id/flecheDepart"
                 android:text="@string/date_depart"
                 android:textColor="@color/gris"
-                android:textStyle="italic"
                 android:textSize="30sp"
                 android:gravity="center|left"
                 android:fontFamily="sans-serif-condensed"/>
@@ -117,8 +115,10 @@
 
             <ImageView
                 android:id="@+id/coeur"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="7dp"
                 android:src="@drawable/coeur" />
 
             <TextView

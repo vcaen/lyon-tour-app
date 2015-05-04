@@ -36,13 +36,14 @@ public class HomeActivity extends ActionBarActivity {
     Calendar minDate_depart = Calendar.getInstance();
     Calendar maxDate_arrivee = maxDate;
     Calendar minDate_arrivee = Calendar.getInstance();
-
-
+    CircularProgressButton buttonValider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        buttonValider = (CircularProgressButton) findViewById(R.id.valider);
+        buttonValider.setEnabled(false);
     }
 
     @Override
@@ -87,8 +88,6 @@ public class HomeActivity extends ActionBarActivity {
         final TextView vosPreferences = (TextView) findViewById(R.id.preferenceClik);
         //final RelativeLayout debutSejour =(RelativeLayout) findViewById(R.id.debutSejour);
         //final RelativeLayout finSejour =(RelativeLayout) findViewById(R.id.finSejour);
-        final CircularProgressButton buttonValider = (CircularProgressButton) findViewById(R.id.valider);
-        buttonValider.setEnabled(false);
 
         final View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
