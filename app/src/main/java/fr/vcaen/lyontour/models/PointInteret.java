@@ -1,24 +1,43 @@
 package fr.vcaen.lyontour.models;
 
+import java.util.Date;
+
 /**
  * Created by vcaen on 28/04/2015.
  */
 public class PointInteret {
 
+    public static enum Meteo {
+        SUNNY("sunny"),
+        CLOUDLY("cloudly"),
+        MOSTY_CLOUDLY("partly_cloudly"),
+        RAINY("rainy");
+
+        public final String text;
+
+        private Meteo(String s) {
+            text = s;
+        }
+    }
+
     String id;
     String title;
     String imageURL;
     String description;
+    Date date;
+    String meteo;
 
     public PointInteret(String id) {
         this.id = id;
     }
 
-    public PointInteret(String id, String title, String imageURL, String description) {
+    public PointInteret(String id, String title, String imageURL, String description, Date date, String meteo) {
         this.id = id;
         this.title = title;
         this.imageURL = imageURL;
         this.description = description;
+        this.date = date;
+        this.meteo = meteo;
     }
 
     public String getTitle() {
@@ -47,5 +66,14 @@ public class PointInteret {
 
     public String getId() {
         return id;
+    }
+
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getMeteo() {
+        return meteo;
     }
 }

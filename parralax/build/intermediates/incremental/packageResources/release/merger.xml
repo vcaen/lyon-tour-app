@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Vadim\workspace\lyon-tour-app\parralax\src\main\res"><file path="C:\Users\Vadim\workspace\lyon-tour-app\parralax\src\main\res\values\attrs.xml" qualifiers=""><declare-styleable name="ParallaxListView">
+        <attr format="boolean" name="enableZoom"/> <!--default=false-->
+        <attr format="float" name="zoomFactor"/> <!--default=1.0-->
+        <attr format="float" name="scrollMultiplier"/> <!--default=0.5-->
+    </declare-styleable></file></source><source path="C:\Users\Vadim\workspace\lyon-tour-app\parralax\build\generated\res\rs\release"/><source path="C:\Users\Vadim\workspace\lyon-tour-app\parralax\build\generated\res\generated\release"/></dataSet><dataSet config="release"><source path="C:\Users\Vadim\workspace\lyon-tour-app\parralax\src\release\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="ParallaxListView"><attr format="boolean" name="enableZoom"/><attr format="float" name="zoomFactor"/><attr format="float" name="scrollMultiplier"/></declare-styleable></configuration></mergedItems></merger>

@@ -1,0 +1,7 @@
+int attr enableZoom 0x7f010000
+int attr scrollMultiplier 0x7f010002
+int attr zoomFactor 0x7f010001
+int[] styleable ParallaxListView { 0x7f010000, 0x7f010001, 0x7f010002 }
+int styleable ParallaxListView_enableZoom 0
+int styleable ParallaxListView_scrollMultiplier 2
+int styleable ParallaxListView_zoomFactor 1

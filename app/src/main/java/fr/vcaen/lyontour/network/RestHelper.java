@@ -18,7 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import fr.vcaen.lyontour.R;
@@ -77,11 +81,22 @@ public class RestHelper {
                             ArrayList<PointInteret> pis = new ArrayList<PointInteret>();
                             for(int i = 0; i < array.length(); i++) {
                                 JSONObject pi = array.getJSONObject(i);
+
+                                SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                                Date date;
+                                try {
+                                    date = sdf.parse("01022014");
+                                } catch (ParseException e) {
+                                    date = Calendar.getInstance().getTime();
+                                }
+
                                 pis.add(new PointInteret(
                                         pi.getString("foursquare_id"),
                                         pi.getString("name"),
                                         NetworkConfiguration.SERVER_FULL_ADDRESS + ENDPOINT_PHOTO + pi.getString("photo"),
-                                        pi.getString("description")
+                                        pi.getString("description"  ),
+                                        date,
+                                        PointInteret.Meteo.SUNNY.text
                                 ));
                             }
                             callback.response(pis);

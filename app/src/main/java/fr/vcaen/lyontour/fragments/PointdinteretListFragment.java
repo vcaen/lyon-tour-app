@@ -15,6 +15,7 @@ import com.poliveira.apps.parallaxlistview.ParallaxListView;
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
  * A list fragment representing a list of Points d'interets. This fragment
@@ -34,7 +35,7 @@ public class PointdinteretListFragment extends Fragment {
     public static final String ARG_FILTER = "filter";
 
     ParallaxListView mListView;
-    ListAdapter adapter;
+    StickyListHeadersAdapter adapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
