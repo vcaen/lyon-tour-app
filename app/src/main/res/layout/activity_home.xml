@@ -119,7 +119,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="7dp"
-                android:src="@drawable/coeur" />
+                android:src="@drawable/favorite22" />
 
             <TextView
                 android:id="@+id/preferenceClik"

@@ -73,11 +73,56 @@
             card_view:cardBackgroundColor="@color/carddarkforground"
             card_view:cardElevation="20dp">
 
-            <ImageView
-                android:id="@+id/adresseMarker"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-            />
+                <RelativeLayout
+                    android:id="@+id/coordonees"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/adresseMarker"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/home149"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:id="@+id/adresseTexte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/adresseMarker"
+                        android:text="@string/adresse"
+                        android:textColor="@color/gris"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_alignTop="@id/adresseMarker"/>
+
+                    <ImageView
+                        android:id="@+id/phoneIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/adresseMarker"
+                        android:src="@drawable/phone370"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/phoneTexte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/phoneIcon"
+                        android:layout_below="@id/adresseTexte"
+                        android:layout_alignTop="@id/phoneIcon"
+                        android:text="@string/numero_telephone"
+                        android:textColor="@color/gris"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-condensed"/>
+
+                </RelativeLayout>
 
             </android.support.v7.widget.CardView>
         </LinearLayout>
