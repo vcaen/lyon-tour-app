@@ -67,6 +67,7 @@ public class PointdinteretDetailFragment extends Fragment {
         final TextView adresse = (TextView) rootView.findViewById(R.id.adresseTexte);
         final ImageView house = (ImageView) rootView.findViewById(R.id.adresseMarker);
         final TextView phoneNumber = (TextView) rootView.findViewById(R.id.phoneTexte);
+        final ImageView phoneIcon = (ImageView) rootView.findViewById(R.id.phoneIcon);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -80,14 +81,17 @@ public class PointdinteretDetailFragment extends Fragment {
         adresse.setOnClickListener(clickListener);
         house.setOnClickListener(clickListener);
 
-        phoneNumber.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener call = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String numero = phoneNumber.getText().toString();
                 Intent keypad = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+numero));
                 startActivity(keypad);
             }
-        });
+        };
+
+        phoneNumber.setOnClickListener(call);
+        phoneIcon.setOnClickListener(call);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
