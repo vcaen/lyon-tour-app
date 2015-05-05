@@ -1,14 +1,19 @@
 package fr.vcaen.lyontour.Activity;
 
+import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,7 +58,7 @@ public class HomeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         buttonValider = (CircularProgressButton) findViewById(R.id.valider);
-        buttonValider.setEnabled(false);
+        //buttonValider.setEnabled(false);
     }
 
     @Override
@@ -224,12 +229,19 @@ public class HomeActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 buttonValider.setIndeterminateProgressMode(true);
+
+                final ProgressBar pb = new ProgressBar(HomeActivity.this);
+                pb.setIndeterminate(true);
+                pb.setLayoutParams(buttonValider.getLayoutParams());
+                ViewGroup parent = (ViewGroup) buttonValider.getParent();
+                int i = parent.indexOfChild(buttonValider);
+                parent.removeView(buttonValider);
+                parent.addView(pb, i);
+
                 final Intent listActivity = new Intent(HomeActivity.this, PointdinteretListActivity.class);
                 final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_DEBUT,sdf.format(dateD.getTime()));
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_FIN, sdf.format(dateA.getTime()));
-
-
 
                 RestHelper.getInstance(HomeActivity.this).getAttractions(
                         sdf.format(dateA.getTime()),
@@ -244,6 +256,10 @@ public class HomeActivity extends ActionBarActivity {
                     @Override
                     public void error(VolleyError error) {
                         Log.d(TAG, ""+error.getMessage());
+                        ViewGroup parent = (ViewGroup) pb.getParent();
+                        int i = parent.indexOfChild(pb);
+                        parent.removeView(pb);
+                        parent.addView(buttonValider, i);
                         buttonValider.setProgress(-1);
                     }
                 });
