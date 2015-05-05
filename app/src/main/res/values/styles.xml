@@ -19,7 +19,7 @@
         <item name="adpButtonBarNegativeButtonStyle">@style/ButtonStyle</item>
         <item name="adpButtonBarPositiveButtonStyle">@style/ButtonStyle</item>
         <item name="android:windowTitleStyle">@style/TitleStyle</item>
-        <item name="android:listSelector">@color/rouge</item>
+        <item name="android:alertDialogTheme">@style/color_checkbox</item>
     </style>
 
     <style name="TitleStyle" parent="Theme.AlertDialogPro.Material.Light">
@@ -30,8 +30,10 @@
         <item name="android:textColor">@color/rouge</item>
     </style>
 
-    <style name="CheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:checkboxStyle">@color/rouge</item>
+    <style name="color_checkbox" parent="Animation.AlertDialogPro.Material.Dialog">
+        <item name="colorPrimary">@color/rouge</item>
+        <item name="colorPrimaryDark">@color/rouge</item>
+        <item name="colorAccent">@color/rouge</item>
     </style>
 
 

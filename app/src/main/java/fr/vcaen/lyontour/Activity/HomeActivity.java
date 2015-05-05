@@ -223,6 +223,10 @@ public class HomeActivity extends ActionBarActivity {
                 final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_DEBUT,sdf.format(dateD.getTime()));
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_FIN, sdf.format(dateA.getTime()));
+                getSharedPreferences("lyon_tour", MODE_PRIVATE).edit()
+                        .putString("date_debut", sdf.format(dateA.getTime()))
+                        .putString("date_fin", sdf.format(dateD.getTime()))
+                        .commit();
 
 
 

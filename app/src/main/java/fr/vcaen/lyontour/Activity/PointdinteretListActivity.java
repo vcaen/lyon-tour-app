@@ -33,11 +33,15 @@ public class PointdinteretListActivity extends ActionBarActivity
      * device.
      */
     private boolean mTwoPane;
+    String dateDebut;
+    String dateFin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pointdinteret_list);
+        dateDebut = getIntent().getExtras().getString(PointdinteretListFragment.ARG_DATE_DEBUT);
+        dateFin = getIntent().getExtras().getString(PointdinteretListFragment.ARG_DATE_FIN);
     }
 
     /**
