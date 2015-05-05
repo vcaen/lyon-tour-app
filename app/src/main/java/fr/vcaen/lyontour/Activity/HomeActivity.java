@@ -92,7 +92,6 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //dateD.set(3000, 12, 31);
         final TextView dateArrivee = (TextView) findViewById(R.id.date_arrivee);
         final TextView dateDepart = (TextView) findViewById(R.id.date_depart);
         final RelativeLayout cardDebutSejour =(RelativeLayout) findViewById(R.id.debutSejour);
@@ -110,14 +109,12 @@ public class HomeActivity extends ActionBarActivity {
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
                         //((TextView) v).setText(date);
                         if(v.getId() == R.id.finSejour) {
-                            Log.d("HomeActivity", "if de date_depart");
                             if (dateD == null) dateD = Calendar.getInstance();
                             dateD.setTimeInMillis(dialog.getDate());
                             maxDate_arrivee = dateD;
                             setDateDepartChoisie(true);
                             dateDepart.setText(date);
                         } else if(v.getId() == R.id.debutSejour) {
-                            Log.d("HomeActivity", "if de date_arrivee");
                             if (dateA == null) dateA = Calendar.getInstance();
                             dateA.setTimeInMillis(dialog.getDate());
                             minDate_depart = dateA;
@@ -170,11 +167,9 @@ public class HomeActivity extends ActionBarActivity {
                 return false;
             }
         };
+
         cardDebutSejour.setOnTouchListener(touchListener);
         cardFinSejour.setOnTouchListener(touchListener);
-
-        //dateDepart.setOnClickListener(clickListener);
-        //dateArrivee.setOnClickListener(clickListener);
 
         cardFinSejour.setOnClickListener(clickListener);
         cardDebutSejour.setOnClickListener(clickListener);
@@ -247,9 +242,6 @@ public class HomeActivity extends ActionBarActivity {
                         buttonValider.setProgress(-1);
                     }
                 });
-
-
-                Log.d("HomeActivity", "bouton valide clique");
             }
         });
     }
