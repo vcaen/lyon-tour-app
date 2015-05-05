@@ -4,4 +4,7 @@
         android:color="@color/gris"/>
     <item android:state_enabled="true"
         android:color="@color/rouge"/>
+    <item android:state_pressed="true"
+        android:color="@color/cpb_red_dark"/>
+
 </selector>
