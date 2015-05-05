@@ -1,23 +1,20 @@
 package fr.vcaen.lyontour.fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.android.volley.VolleyError;
+import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
-import java.util.List;
-
-import fr.vcaen.lyontour.Activity.dummy.DummyContent;
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
-import fr.vcaen.lyontour.models.PointInteret;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
-import fr.vcaen.lyontour.network.RestHelper;
 
 /**
  * A list fragment representing a list of Points d'interets. This fragment
@@ -28,10 +25,16 @@ import fr.vcaen.lyontour.network.RestHelper;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class PointdinteretListFragment extends ListFragment {
+public class PointdinteretListFragment extends Fragment {
 
     private static final String TAG = PointdinteretListFragment.class.getName();
 
+    public static final String ARG_DATE_DEBUT = "datedebut";
+    public static final String ARG_DATE_FIN = "datefin";
+    public static final String ARG_FILTER = "filter";
+
+    ParallaxListView mListView;
+    ListAdapter adapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -83,20 +86,12 @@ public class PointdinteretListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        RestHelper.getInstance(getActivity()).getAttractions("02042014","08042014", new RestHelper.APICallBack<List<PointInteret>>() {
-            @Override
-            public void response(List<PointInteret> object) {
-                VisiteContainer.addAll(object);
-                setListAdapter(new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST));
-            }
+    }
 
-            @Override
-            public void error(VolleyError error) {
-                Log.d(TAG, ""+error.getMessage());
-            }
-        });
-
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_pointinteret_list, container, false);
     }
 
     @Override
@@ -106,9 +101,14 @@ public class PointdinteretListFragment extends ListFragment {
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+            //mListView.setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+        mListView = (ParallaxListView) getView().findViewById(R.id.list_pi_parallax_list_view);
+        mListView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.attraction_list_header, mListView, false));
+        adapter = new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST);
+        mListView.setAdapter(adapter);
         getView().getRootView().setBackgroundResource(R.color.activitybackground);
+        mListView.setOnItemClickListener(new onListItemClick());
     }
 
     @Override
@@ -131,13 +131,13 @@ public class PointdinteretListFragment extends ListFragment {
         mCallbacks = sDummyCallbacks;
     }
 
-    @Override
-    public void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
 
-        // Notify the active callbacks interface (the activity, if the
-        // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(String.valueOf(((VisitListAdapter)getListAdapter()).getItemStringId(position)));
+    public class onListItemClick implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            mCallbacks.onItemSelected(String.valueOf(((VisitListAdapter)adapter).getItemStringId(position)));
+        }
     }
 
     @Override
@@ -149,10 +149,12 @@ public class PointdinteretListFragment extends ListFragment {
         }
     }
 
+
     /**
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
      */
+    /*
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
@@ -169,5 +171,5 @@ public class PointdinteretListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
-    }
+    } */
 }

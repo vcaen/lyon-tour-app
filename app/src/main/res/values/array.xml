@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="choixPreference">
+        <item>Restaurant</item>
+        <item>Bar</item>
+        <item>Café</item>
+        <item>Magasins</item>
+        <item>Arts</item>
+        <item>En plein air</item>
+        <item>Spectacle</item>
+        <item>Tendance</item>
+        <item>Spécialités</item>
+    </array>
+</resources>

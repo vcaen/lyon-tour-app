@@ -11,7 +11,6 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import fr.vcaen.lyontour.R;
 
-import fr.vcaen.lyontour.Activity.dummy.DummyContent;
 import fr.vcaen.lyontour.models.PointInteret;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
 import fr.vcaen.lyontour.network.RestHelper;

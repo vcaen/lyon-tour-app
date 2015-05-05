@@ -15,6 +15,25 @@
         <item name="android:background">@color/rouge</item>
     </style>
 
+    <style name="FilterDialog" parent="Theme.AlertDialogPro.Material.Light">
+        <item name="adpButtonBarNegativeButtonStyle">@style/ButtonStyle</item>
+        <item name="adpButtonBarPositiveButtonStyle">@style/ButtonStyle</item>
+        <item name="android:windowTitleStyle">@style/TitleStyle</item>
+        <item name="android:listSelector">@color/rouge</item>
+    </style>
+
+    <style name="TitleStyle" parent="Theme.AlertDialogPro.Material.Light">
+        <item name="android:textColor">@color/rouge</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AlertDialogPro.Material.Light.Button">
+        <item name="android:textColor">@color/rouge</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:checkboxStyle">@color/rouge</item>
+    </style>
+
 
 
 </resources>
