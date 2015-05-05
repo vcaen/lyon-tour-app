@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alertdialogpro.AlertDialogPro;
@@ -85,9 +87,9 @@ public class HomeActivity extends ActionBarActivity {
         //dateD.set(3000, 12, 31);
         final TextView dateArrivee = (TextView) findViewById(R.id.date_arrivee);
         final TextView dateDepart = (TextView) findViewById(R.id.date_depart);
-        final TextView vosPreferences = (TextView) findViewById(R.id.preferenceClik);
-        //final RelativeLayout debutSejour =(RelativeLayout) findViewById(R.id.debutSejour);
-        //final RelativeLayout finSejour =(RelativeLayout) findViewById(R.id.finSejour);
+        final RelativeLayout cardDebutSejour =(RelativeLayout) findViewById(R.id.debutSejour);
+        final RelativeLayout cardFinSejour =(RelativeLayout) findViewById(R.id.finSejour);
+        final RelativeLayout cardPreference = (RelativeLayout) findViewById(R.id.preference);
 
         final View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -98,17 +100,21 @@ public class HomeActivity extends ActionBarActivity {
                     public void onPositiveActionClicked(DialogFragment fragment) {
                         DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        ((TextView) v).setText(date);
-                        if(v.getId() == R.id.date_depart) {
+                        //((TextView) v).setText(date);
+                        if(v.getId() == R.id.finSejour) {
+                            Log.d("HomeActivity", "if de date_depart");
                             if (dateD == null) dateD = Calendar.getInstance();
                             dateD.setTimeInMillis(dialog.getDate());
                             maxDate_arrivee = dateD;
                             setDateDepartChoisie(true);
-                        }else {
+                            dateDepart.setText(date);
+                        } else if(v.getId() == R.id.debutSejour) {
+                            Log.d("HomeActivity", "if de date_arrivee");
                             if (dateA == null) dateA = Calendar.getInstance();
                             dateA.setTimeInMillis(dialog.getDate());
                             minDate_depart = dateA;
                             setDateArriveeChoisie(true);
+                            dateArrivee.setText(date);
                         }
                         buttonValider.setEnabled(dateArriveeChoisie && dateDepartChoisie);
                         super.onPositiveActionClicked(fragment);
@@ -122,12 +128,12 @@ public class HomeActivity extends ActionBarActivity {
                 };
 
                 // onclick
-                if(v.getId() == R.id.date_depart) {
+                if(v.getId() == R.id.finSejour) {
                     builder.dateRange(minDate_depart.getTimeInMillis(), maxDate_depart.getTimeInMillis());
                     builder.date((dateD != null) ?
                             dateD.getTimeInMillis() :
                             (dateA != null) ? dateA.getTimeInMillis() :Calendar.getInstance().getTimeInMillis());
-                } else {
+                } else if(v.getId() == R.id.debutSejour) {
                     builder.dateRange(minDate_arrivee.getTimeInMillis(), maxDate_arrivee.getTimeInMillis());
                     builder.date((dateA != null) ? dateA.getTimeInMillis() : Calendar.getInstance().getTimeInMillis());
 
@@ -139,13 +145,33 @@ public class HomeActivity extends ActionBarActivity {
 
             }};
 
-        dateDepart.setOnClickListener(clickListener);
-        dateArrivee.setOnClickListener(clickListener);
+        View.OnTouchListener touchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    v.setBackgroundColor(getResources().getColor(R.color.material_blue_grey_800));
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.setBackgroundColor(getResources().getColor(R.color.material_blue_grey_950));
+                    v.performClick();
+                    return false;
+                } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    v.setBackgroundColor(getResources().getColor(R.color.material_blue_grey_950));
+                    return false;
+                }
+                return false;
+            }
+        };
+        cardDebutSejour.setOnTouchListener(touchListener);
+        cardFinSejour.setOnTouchListener(touchListener);
 
-        //finSejour.setOnClickListener(clickListener);
-        //debutSejour.setOnClickListener(clickListener);
+        //dateDepart.setOnClickListener(clickListener);
+        //dateArrivee.setOnClickListener(clickListener);
 
-        vosPreferences.setOnClickListener(new View.OnClickListener() {
+        cardFinSejour.setOnClickListener(clickListener);
+        cardDebutSejour.setOnClickListener(clickListener);
+
+        cardPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialogPro.Builder builder =  new AlertDialogPro.Builder(HomeActivity.this, R.style.FilterDialog);
