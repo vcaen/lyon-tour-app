@@ -31,9 +31,11 @@ import fr.vcaen.lyontour.network.RestHelper;
 
 public class HomeActivity extends ActionBarActivity {
 
-    final ArrayList mSelectedItems = new ArrayList();
-    boolean [] isSelected = {true, true, true, true, true, true, true, true, true};
-    final boolean [] isSelectedTemp = {true, true, true, true, true, true, true, true, true};
+    final boolean [] isSelected = {true, true, true, true, true, true};
+    final boolean [] isSelectedTemp = {true, true, true, true, true, true};
+    final boolean [] isSelectedTemp2 = {true, true, true, true, true, true};
+    final static String [] ITEMS = {"drinks","coffee","shops","arts","outdoors","sights"};
+    ArrayList<String> mSelectedItems = new ArrayList<String>();
     Calendar dateA;
     Calendar dateD;
     static Calendar maxDate = Calendar.getInstance();
@@ -54,6 +56,10 @@ public class HomeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_home);
         buttonValider = (CircularProgressButton) findViewById(R.id.valider);
         buttonValider.setEnabled(false);
+        for (int i = 0; i<ITEMS.length; i++){
+            mSelectedItems.add(ITEMS[i]);
+        }
+        Log.d("HomeActivity", "liste debut : " + mSelectedItems);
     }
 
     @Override
@@ -178,39 +184,51 @@ public class HomeActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 final AlertDialogPro.Builder builder =  new AlertDialogPro.Builder(HomeActivity.this, R.style.FilterDialog);
-
                 builder.setTitle(R.string.vos_preferences);
+
+                for (int i = 0; i < isSelected.length ; i++) {
+                    isSelectedTemp2[i] = isSelectedTemp[i];
+                    //Log.d("HomeActivity", "temps 2 modifie");
+                }
+
                 builder.setMultiChoiceItems(R.array.choixPreference, isSelected,
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which,
                                                 boolean isChecked) {
                                 if (isChecked) {
-                                    mSelectedItems.add(which);
+                                    mSelectedItems.add(which, ITEMS[which]);
                                     isSelectedTemp[which] = true;
+                                    Log.d("HomeActivity", "check");
                                 } else if (mSelectedItems.contains(which)) {
                                     mSelectedItems.remove(Integer.valueOf(which));
                                     isSelectedTemp[which] = false;
+                                    Log.d("HomeActivity", "non check");
                                 }
+                                Log.d("HomeActivity", "liste : " + mSelectedItems);
                             }
                         });
 
                 builder.setPositiveButton(R.string.valider, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
+                        for (int i = 0; i < isSelected.length ; i++) {
+                            isSelected[i] = isSelectedTemp[i];
+                            //Log.d("HomeActivity", "boolean1 "+isSelectedTemp[i]);
+                        }
+                        Log.d("HomeActivity", "clik valider");
                     }
-
                 });
                 builder.setNegativeButton(R.string.annuler, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         for (int i = 0; i < isSelected.length ; i++) {
-                            isSelected[i] = isSelectedTemp[i];
+                            isSelected[i] = isSelectedTemp2[i];
+                            //Log.d("HomeActivity", "boolean2 "+isSelectedTemp2[i]);
                         }
+                        Log.d("HomeActivity", "clik annuler");
                     }
                 });
-
                 builder.create().show();
             }
         });

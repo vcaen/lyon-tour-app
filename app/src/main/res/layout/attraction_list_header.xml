@@ -12,49 +12,67 @@
         android:scaleType="centerCrop"
         android:src="@drawable/lyon" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient">
 
-        <TextView
-        android:id="@+id/sejour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/votre_sejour"
-        android:textColor="@color/rouge"
-        android:textSize="30sp"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/du"
-            android:textColor="@color/rouge"
-            android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/sejour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/votre_sejour"
+                android:textColor="@color/blanc"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"/>
 
-        <TextView
-            android:id="@+id/debut_sejour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/debut_sejour"
-            android:textColor="@color/rouge"
-            android:textSize="30sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/du"
+                android:textColor="@color/blanc"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="30sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/au"
-            android:textColor="@color/rouge"
-            android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/debut_sejour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/debut_sejour"
+                android:textColor="@color/blanc"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"/>
 
-        <TextView
-            android:id="@+id/fin_sejour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fin_sejour"
-            android:textColor="@color/rouge"
-            android:textSize="30sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/au"
+                android:textColor="@color/blanc"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="30sp"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/fin_sejour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fin_sejour"
+                android:textColor="@color/blanc"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
