@@ -16,10 +16,14 @@
     <string name="complete">Complete</string>
     <string name="error">Erreur</string>
     <string name="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae libero turpis. Etiam id porttitor diam. Mauris diam mauris, feugiat sed elit non, lacinia lobortis urna. In at interdum justo, ut posuere metus. Proin sit amet imperdiet augue, in placerat ligula. Aliquam erat volutpat. Sed suscipit mi ligula, vel consectetur eros lobortis faucibus. Mauris pellentesque lacinia diam, nec mollis massa sollicitudin vel.</string>
-    <string name="votre_programme">Votre Programme</string>
+    <string name="votre_sejour">Votre Sejour</string>
     <string name="vos_preferences">Vos préférences</string>
     <string name="annuler">Annuler</string>
     <string name="bouton_preference">Mes préférences</string>
     <string name="adresse">Adresse</string>
-    <string name="numero_telephone">06 89 68 39 96</string>
+    <string name="numero_telephone">06 43 44 12 64</string>
+    <string name="du">Du</string>
+    <string name="au">Au</string>
+    <string name="debut_sejour">debut</string>
+    <string name="fin_sejour">fin</string>
 </resources>

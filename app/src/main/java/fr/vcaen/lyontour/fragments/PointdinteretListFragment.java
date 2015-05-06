@@ -2,16 +2,24 @@ package fr.vcaen.lyontour.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import fr.vcaen.lyontour.Activity.HomeActivity;
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
@@ -110,6 +118,19 @@ public class PointdinteretListFragment extends Fragment {
         mListView.setAdapter(adapter);
         getView().getRootView().setBackgroundResource(R.color.activitybackground);
         mListView.setOnItemClickListener(new onListItemClick());
+
+        TextView debutSejour = (TextView) getView().findViewById(R.id.debut_sejour);
+        TextView finSejour = (TextView) getView().findViewById(R.id.fin_sejour);
+        SimpleDateFormat in = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat out = new SimpleDateFormat("cccc dd MMMM");
+        String debut = getActivity().getSharedPreferences("lyon_tour", Context.MODE_PRIVATE).getString("date_debut", "01011970");
+        String fin = getActivity().getSharedPreferences("lyon_tour", Context.MODE_PRIVATE).getString("date_fin", "01011970");
+        try {
+            debutSejour.setText(out.format(in.parse(debut)));
+            finSejour.setText(out.format(in.parse(fin)));
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
