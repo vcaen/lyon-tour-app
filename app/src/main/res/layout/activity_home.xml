@@ -18,7 +18,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         card_view:cardBackgroundColor="@color/material_blue_grey_950"
-        card_view:cardCornerRadius="5dp">
+        card_view:cardCornerRadius="5dp"
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:id="@+id/debutSejour"
@@ -49,7 +50,7 @@
                 android:layout_toRightOf="@id/flecheArrivee"
                 android:text="@string/date_arrivee"
                 android:textColor="@color/gris"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:gravity="center|left"
                 android:fontFamily="sans-serif-condensed"/>
 
@@ -93,7 +94,7 @@
                 android:layout_toRightOf="@id/flecheDepart"
                 android:text="@string/date_depart"
                 android:textColor="@color/gris"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:gravity="center|left"
                 android:fontFamily="sans-serif-condensed"/>
         </RelativeLayout>
