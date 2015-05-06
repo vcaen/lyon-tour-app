@@ -262,6 +262,7 @@ public class HomeActivity extends ActionBarActivity {
                         new RestHelper.APICallBack<List<PointInteret>>() {
                             @Override
                             public void response(List<PointInteret> object) {
+                                VisiteContainer.clear();
                                 VisiteContainer.addAll(object);
                                 ViewGroup parent = (ViewGroup) pb.getParent();
                                 int i = parent.indexOfChild(pb);

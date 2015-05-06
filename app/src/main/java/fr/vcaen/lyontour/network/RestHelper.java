@@ -6,9 +6,11 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -37,12 +39,11 @@ public class RestHelper {
     public static final String TAG = RestHelper.class.getName();
     private static RestHelper instance;
     private Context mContext;
+    int socketTimeout = 30000;//30 seconds - change to what you want
+    RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
     public static final String ENDPOINT_ATTRACTION = "attraction";
     public static final String ENDPOINT_PHOTO = "photo/";
-
-
-    
 
     private RequestQueue queue;
     private ImageLoader imageLoader;
@@ -153,6 +154,7 @@ public class RestHelper {
                 responseList,
                 errorList);
         request.setTag((tag != null) ? tag : TAG);
+        request.setRetryPolicy(policy);
         queue.add(request);
     }
     public void getJsonObject(String endpoint, Response.Listener<JSONObject> responseList) {

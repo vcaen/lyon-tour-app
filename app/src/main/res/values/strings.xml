@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lyon Tour</string>
+    <string name="app_name">Follow My Lyon</string>
     <string name="title_activity_maps">Map</string>
     <string name="network_error">Network error.</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -7,7 +7,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_pointdinteret_list">Points d\'interets</string>
-    <string name="title_pointdinteret_detail">Point d\'interet Detail</string>
+    <string name="title_pointdinteret_detail">Plus d\'informations</string>
     <string name="date_arrivee">Ma date d\'arrivée</string>
     <string name="date_depart">Ma date de départ</string>
     <string name="arrivee">Arrivée le</string>
@@ -26,4 +26,5 @@
     <string name="au">Au</string>
     <string name="debut_sejour">debut</string>
     <string name="fin_sejour">fin</string>
+    <string name="pas_de_description">Pas de description disponible pour ce point d\'intérêt.</string>
 </resources>

@@ -29,7 +29,7 @@ public class VisitListAdapter extends ArrayAdapter<PointInteret> implements Stic
 
     ImageView connector;
     private LayoutInflater inflater;
-    private SimpleDateFormat humanReadable = new SimpleDateFormat("cccc MMMM yyyy");
+    private SimpleDateFormat humanReadable = new SimpleDateFormat("cccc MM MMMM");
 
     private static HashMap<String, Bitmap> meteoMap = new HashMap<>();
 

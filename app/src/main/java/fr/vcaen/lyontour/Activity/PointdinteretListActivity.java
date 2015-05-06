@@ -38,6 +38,13 @@ public class PointdinteretListActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pointdinteret_list);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportActionBar().hide();
     }
 
     /**

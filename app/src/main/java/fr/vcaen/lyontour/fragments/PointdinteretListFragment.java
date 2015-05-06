@@ -4,26 +4,23 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.poliveira.apps.parallaxlistview.ParallaxListView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import fr.vcaen.lyontour.Activity.HomeActivity;
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.adapter.VisitListAdapter;
 import fr.vcaen.lyontour.models.containers.VisiteContainer;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * A list fragment representing a list of Points d'interets. This fragment
@@ -42,8 +39,9 @@ public class PointdinteretListFragment extends Fragment {
     public static final String ARG_DATE_FIN = "datefin";
     public static final String ARG_FILTER = "filter";
 
-    ParallaxListView mListView;
+    StickyListHeadersListView mListView;
     StickyListHeadersAdapter adapter;
+    ViewGroup wrapper;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -61,6 +59,7 @@ public class PointdinteretListFragment extends Fragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+    private ViewGroup header;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -104,6 +103,12 @@ public class PointdinteretListFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -112,12 +117,38 @@ public class PointdinteretListFragment extends Fragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             //mListView.setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
-        mListView = (ParallaxListView) getView().findViewById(R.id.list_pi_parallax_list_view);
-        mListView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.attraction_list_header, mListView, false));
+        mListView = (StickyListHeadersListView) getView().findViewById(R.id.attraction_list_view);
+        //mListView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.attraction_list_header, mListView, false));
         adapter = new VisitListAdapter(getActivity(), 0, VisiteContainer.PI_LIST);
         mListView.setAdapter(adapter);
         getView().getRootView().setBackgroundResource(R.color.activitybackground);
         mListView.setOnItemClickListener(new onListItemClick());
+        mListView.getItemAtPosition(1);
+
+//        wrapper = (ViewGroup) getView().findViewById(R.id.attraction_list_wrapper);
+//        header = (ViewGroup) getView().findViewById(R.id.attration_list_header);
+
+
+//        wrapper.setOnTouchListener(new View.OnTouchListener() {
+//            float orig_y;
+//            float new_y;
+//            float header_y =  header.getY();
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        orig_y = event.getY();
+//                        return true;
+//                    case MotionEvent.ACTION_MOVE:
+//                        new_y = event.getY();
+//                        if(new_y < orig_y) {
+//                            header.setY(header_y + new_y - orig_y);
+//                        }
+//                }
+//                return false;
+//            }
+//        });
+
 
         TextView debutSejour = (TextView) getView().findViewById(R.id.debut_sejour);
         TextView finSejour = (TextView) getView().findViewById(R.id.fin_sejour);

@@ -10,7 +10,7 @@ public class PointInteret {
     public static enum Meteo {
         SUNNY("sunny"),
         CLOUDLY("cloudly"),
-        MOSTY_CLOUDLY("partly_cloudly"),
+        MOSTY_CLOUDLY("partly cloudy"),
         RAINY("rainy");
 
         public final String text;

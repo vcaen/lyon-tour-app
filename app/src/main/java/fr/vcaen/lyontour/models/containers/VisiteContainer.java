@@ -25,4 +25,9 @@ public class VisiteContainer {
             PI_MAP.put(pi.getId(), pi);
         }
     }
+
+    public static void clear() {
+        PI_LIST.clear();
+        PI_MAP.clear();
+    }
 }

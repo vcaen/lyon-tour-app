@@ -100,11 +100,16 @@ public class PointdinteretDetailFragment extends Fragment {
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.attraction_detail_title)).setText(mItem.getTitle());
-            ((TextView) rootView.findViewById(R.id.attraction_detail_description)).setText(mItem.getDescription());
+            getActivity().setTitle(mItem.getTitle());
+            ((TextView) rootView.findViewById(R.id.attraction_detail_description)).setText(
+                    mItem.getDescription().isEmpty()
+                            ? getActivity().getResources().getString(R.string.pas_de_description)
+                            : mItem.getDescription());
             NetworkImageView image = (NetworkImageView) rootView.findViewById(R.id.attraction_detail_image);
             image.setImageUrl(
                 mItem.getImageURL(),
                 RestHelper.getInstance(getActivity()).getImageLoader());
+            
         }
 
         LatLng latLng = new LatLng(mItem.getLatitude(), mItem.getLongitude());
