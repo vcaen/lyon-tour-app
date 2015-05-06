@@ -41,6 +41,7 @@ public class HomeActivity extends ActionBarActivity {
     final boolean [] isSelectedTemp2 = {true, true, true, true, true, true};
     final static String [] ITEMS = {"drinks","coffee","shops","arts","outdoors","sights"};
     ArrayList<String> mSelectedItems = new ArrayList<String>();
+    ArrayList<String> mSelectedItemsTemp = new ArrayList<String>();
     Calendar dateA;
     Calendar dateD;
     static Calendar maxDate = Calendar.getInstance();
@@ -63,6 +64,7 @@ public class HomeActivity extends ActionBarActivity {
         buttonValider.setEnabled(false);
         for (int i = 0; i<ITEMS.length; i++){
             mSelectedItems.add(ITEMS[i]);
+            mSelectedItemsTemp.add(ITEMS[i]);
         }
         Log.d("HomeActivity", "liste debut : " + mSelectedItems);
     }
@@ -202,23 +204,27 @@ public class HomeActivity extends ActionBarActivity {
                             public void onClick(DialogInterface dialog, int which,
                                                 boolean isChecked) {
                                 if (isChecked) {
-                                    mSelectedItems.add(which, ITEMS[which]);
-                                    isSelectedTemp[which] = true;
+                                    mSelectedItemsTemp.set(which, ITEMS[which]);
+                                    //isSelectedTemp[which] = true;
                                     Log.d("HomeActivity", "check");
-                                } else if (mSelectedItems.contains(which)) {
-                                    mSelectedItems.remove(Integer.valueOf(which));
-                                    isSelectedTemp[which] = false;
+                                //} else if (mSelectedItems.contains(which)) {
+                                } else {
+                                    //mSelectedItems.remove(Integer.valueOf(which));
+                                    mSelectedItemsTemp.set(which, null);
+                                    //isSelectedTemp[which] = false;
                                     Log.d("HomeActivity", "non check");
                                 }
-                                Log.d("HomeActivity", "liste : " + mSelectedItems);
+                                Log.d("HomeActivity", "liste : " + mSelectedItemsTemp);
                             }
                         });
 
                 builder.setPositiveButton(R.string.valider, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        for (int i = 0; i < isSelected.length ; i++) {
-                            isSelected[i] = isSelectedTemp[i];
+                        mSelectedItems.clear();
+                        mSelectedItems.addAll(mSelectedItemsTemp);
+                        for (int i = 0; i < mSelectedItems.size() ; i++) {
+                            isSelected[i] = mSelectedItems.get(i) != null;
                             //Log.d("HomeActivity", "boolean1 "+isSelectedTemp[i]);
                         }
                         Log.d("HomeActivity", "clik valider");
@@ -227,11 +233,6 @@ public class HomeActivity extends ActionBarActivity {
                 builder.setNegativeButton(R.string.annuler, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        for (int i = 0; i < isSelected.length ; i++) {
-                            isSelected[i] = isSelectedTemp2[i];
-                            //Log.d("HomeActivity", "boolean2 "+isSelectedTemp2[i]);
-                        }
-                        Log.d("HomeActivity", "clik annuler");
                     }
                 });
                 builder.create().show();
