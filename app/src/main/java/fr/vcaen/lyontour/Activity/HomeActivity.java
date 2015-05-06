@@ -253,29 +253,49 @@ public class HomeActivity extends ActionBarActivity {
                         .putString("date_fin", sdf.format(dateD.getTime()))
                         .commit();
 
+
+
                 RestHelper.getInstance(HomeActivity.this).getAttractions(
                         sdf.format(dateA.getTime()),
                         sdf.format(dateD.getTime()),
+                        mSelectedItems,
                         new RestHelper.APICallBack<List<PointInteret>>() {
-                    @Override
-                    public void response(List<PointInteret> object) {
-                        VisiteContainer.addAll(object);
-                        startActivity(listActivity);
-                    }
+                            @Override
+                            public void response(List<PointInteret> object) {
+                                VisiteContainer.addAll(object);
+                                ViewGroup parent = (ViewGroup) pb.getParent();
+                                int i = parent.indexOfChild(pb);
+                                parent.removeView(pb);
+                                buttonValider.setProgress(100);
+                                parent.addView(buttonValider, i);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(listActivity);
+                                    }
+                                }, 500);
 
-                    @Override
-                    public void error(VolleyError error) {
-                        Log.d(TAG, ""+error.getMessage());
-                        ViewGroup parent = (ViewGroup) pb.getParent();
-                        int i = parent.indexOfChild(pb);
-                        parent.removeView(pb);
-                        parent.addView(buttonValider, i);
-                        buttonValider.setProgress(-1);
-                    }
-                });
+                            }
+
+                            @Override
+                            public void error(VolleyError error) {
+                                Log.d(TAG, "" + error.getMessage());
+                                ViewGroup parent = (ViewGroup) pb.getParent();
+                                int i = parent.indexOfChild(pb);
+                                parent.removeView(pb);
+                                parent.addView(buttonValider, i);
+                                buttonValider.setProgress(-1);
+                            }
+                        });
             }
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(dateA != null && dateD != null) {
+            buttonValider.setProgress(0);
+        }
+    }
 }

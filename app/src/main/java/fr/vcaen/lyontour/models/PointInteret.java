@@ -42,6 +42,7 @@ public class PointInteret {
         this.meteo = meteo;
         this.latitude = latitude;
         this.longitude = longitude;
+
     }
 
     public String getTitle() {

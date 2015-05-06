@@ -162,6 +162,7 @@ public class PointdinteretListFragment extends Fragment {
         }
     }
 
+    
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -170,7 +171,6 @@ public class PointdinteretListFragment extends Fragment {
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
     }
-
 
     /**
      * Turns on activate-on-click mode. When this mode is on, list items will be

@@ -70,39 +70,58 @@ public class RestHelper {
 
 
 
-    public void getAttractions(String dateDebut, String dateFin, final APICallBack<List<PointInteret>> callback) {
+    public void getAttractions(String dateDebut, String dateFin, List<String> filtre, final APICallBack<List<PointInteret>> callback) {
         String url =  ENDPOINT_ATTRACTION + "?datedebut="+dateDebut+"&datefin="+dateFin;
+        if(filtre.size() == 0) return;
+        url += "&filtre=";
+        for(String f : filtre) {
+            url += f + ",";
+        }
+        url = url.substring(0, url.length() - 1);
+
         getJsonObject(url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        try {
-                            JSONArray array = jsonObject.getJSONArray("PI");
-                            ArrayList<PointInteret> pis = new ArrayList<PointInteret>();
-                            for(int i = 0; i < array.length(); i++) {
-                                JSONObject pi = array.getJSONObject(i);
+                        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                        ArrayList<PointInteret> pis = new ArrayList<PointInteret>();
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                        try {
+                            JSONArray jours = jsonObject.getJSONArray("Jours");
+                            for (int j = 0; j < jours.length(); j++) {
+                                JSONObject jour = jours.getJSONObject(j);
                                 Date date;
+                                String weather;
                                 try {
-                                    date = sdf.parse("01022014");
+                                    date = sdf.parse(jour.getString("date"));
                                 } catch (ParseException e) {
                                     date = Calendar.getInstance().getTime();
                                 }
+                                weather = jour.optString("weather_status", "sunny");
 
-                                pis.add(new PointInteret(
-                                        pi.getString("foursquare_id"),
-                                        pi.getString("name"),
-                                        NetworkConfiguration.SERVER_FULL_ADDRESS + ENDPOINT_PHOTO + pi.getString("photo"),
-                                        pi.getString("description"  ),
-                                        date,
-                                        PointInteret.Meteo.SUNNY.text,
-                                        pi.getDouble("latitude"),
-                                        pi.getDouble("longitude")
-                                ));
+                                JSONArray etapes = jour.getJSONArray("etapes");
+                                for (int k = 0; k < etapes.length(); k++) {
+                                    JSONObject etape = etapes.getJSONObject(k);
+                                    JSONObject pi = etape.getJSONObject("attraction");
+
+                                    // Date
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(date);
+                                    cal.set(Calendar.HOUR_OF_DAY, etape.optInt("heure", 12));
+
+                                    pis.add(new PointInteret(
+                                            pi.getString("foursquare_id"),
+                                            pi.getString("name"),
+                                            NetworkConfiguration.SERVER_FULL_ADDRESS + ENDPOINT_PHOTO + pi.getString("photo"),
+                                            pi.getString("description"  ),
+                                            cal.getTime(),
+                                            weather,
+                                            pi.getDouble("latitude"),
+                                            pi.getDouble("longitude")
+                                    ));
+                                }
                             }
                             callback.response(pis);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
