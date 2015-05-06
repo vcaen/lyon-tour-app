@@ -96,7 +96,9 @@ public class RestHelper {
                                         NetworkConfiguration.SERVER_FULL_ADDRESS + ENDPOINT_PHOTO + pi.getString("photo"),
                                         pi.getString("description"  ),
                                         date,
-                                        PointInteret.Meteo.SUNNY.text
+                                        PointInteret.Meteo.SUNNY.text,
+                                        pi.getDouble("latitude"),
+                                        pi.getDouble("longitude")
                                 ));
                             }
                             callback.response(pis);

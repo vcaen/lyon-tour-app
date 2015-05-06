@@ -26,18 +26,22 @@ public class PointInteret {
     String description;
     Date date;
     String meteo;
+    Double latitude;
+    Double longitude;
 
     public PointInteret(String id) {
         this.id = id;
     }
 
-    public PointInteret(String id, String title, String imageURL, String description, Date date, String meteo) {
+    public PointInteret(String id, String title, String imageURL, String description, Date date, String meteo, Double latitude, Double longitude) {
         this.id = id;
         this.title = title;
         this.imageURL = imageURL;
         this.description = description;
         this.date = date;
         this.meteo = meteo;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getTitle() {
@@ -75,5 +79,13 @@ public class PointInteret {
 
     public String getMeteo() {
         return meteo;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
     }
 }
