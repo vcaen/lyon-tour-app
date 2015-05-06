@@ -19,7 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
+
+    repositories {
+        mavenCentral()
+    }
+
 
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -35,4 +39,9 @@ android {
         compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.3'
         //compile 'com.github.kanytu:android-parallax-listview:v1.1'
         //compile 'se.emilsjolander:stickylistheaders:2.6.0'
+
+        compile('com.mapbox.mapboxsdk:mapbox-android-sdk:0.7.3@aar') {
+            transitive = true
+        }
+    }
 }

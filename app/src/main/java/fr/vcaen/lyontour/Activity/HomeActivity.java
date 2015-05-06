@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import fr.vcaen.lyontour.R;
 import fr.vcaen.lyontour.fragments.PointdinteretListFragment;
@@ -36,9 +37,8 @@ import fr.vcaen.lyontour.network.RestHelper;
 
 public class HomeActivity extends ActionBarActivity {
 
-    final boolean [] isSelected = {true, true, true, true, true, true};
-    final boolean [] isSelectedTemp = {true, true, true, true, true, true};
-    final boolean [] isSelectedTemp2 = {true, true, true, true, true, true};
+    boolean [] isSelected = {true, true, true, true, true, true};
+    boolean [] isSelectedTemp = {true, true, true, true, true, true};
     final static String [] ITEMS = {"drinks","coffee","shops","arts","outdoors","sights"};
     ArrayList<String> mSelectedItems = new ArrayList<String>();
     ArrayList<String> mSelectedItemsTemp = new ArrayList<String>();
@@ -193,26 +193,16 @@ public class HomeActivity extends ActionBarActivity {
                 final AlertDialogPro.Builder builder =  new AlertDialogPro.Builder(HomeActivity.this, R.style.FilterDialog);
                 builder.setTitle(R.string.vos_preferences);
 
-                for (int i = 0; i < isSelected.length ; i++) {
-                    isSelectedTemp2[i] = isSelectedTemp[i];
-                    //Log.d("HomeActivity", "temps 2 modifie");
-                }
-
                 builder.setMultiChoiceItems(R.array.choixPreference, isSelected,
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which,
                                                 boolean isChecked) {
+
                                 if (isChecked) {
                                     mSelectedItemsTemp.set(which, ITEMS[which]);
-                                    //isSelectedTemp[which] = true;
-                                    Log.d("HomeActivity", "check");
-                                //} else if (mSelectedItems.contains(which)) {
                                 } else {
-                                    //mSelectedItems.remove(Integer.valueOf(which));
                                     mSelectedItemsTemp.set(which, null);
-                                    //isSelectedTemp[which] = false;
-                                    Log.d("HomeActivity", "non check");
                                 }
                                 Log.d("HomeActivity", "liste : " + mSelectedItemsTemp);
                             }
@@ -222,17 +212,19 @@ public class HomeActivity extends ActionBarActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         mSelectedItems.clear();
-                        mSelectedItems.addAll(mSelectedItemsTemp);
-                        for (int i = 0; i < mSelectedItems.size() ; i++) {
-                            isSelected[i] = mSelectedItems.get(i) != null;
-                            //Log.d("HomeActivity", "boolean1 "+isSelectedTemp[i]);
+                        for (int i = 0; i < isSelected.length; i++) {
+                            if (isSelected[i])
+                                mSelectedItems.add(ITEMS[i]);
                         }
+                        isSelectedTemp = isSelected.clone();
                         Log.d("HomeActivity", "clik valider");
                     }
                 });
                 builder.setNegativeButton(R.string.annuler, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        Log.d(TAG, "g");
+                        isSelected = isSelectedTemp.clone();
                     }
                 });
                 builder.create().show();
@@ -253,7 +245,7 @@ public class HomeActivity extends ActionBarActivity {
                 parent.addView(pb, i);
 
                 final Intent listActivity = new Intent(HomeActivity.this, PointdinteretListActivity.class);
-                final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy", Locale.US);
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_DEBUT,sdf.format(dateD.getTime()));
                 listActivity.putExtra(PointdinteretListFragment.ARG_DATE_FIN, sdf.format(dateA.getTime()));
                 getSharedPreferences("lyon_tour", MODE_PRIVATE).edit()

@@ -16,6 +16,13 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.rey.material.widget.EditText;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
+import com.mapbox.mapboxsdk.overlay.Icon;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
+import com.mapbox.mapboxsdk.views.MapView;
 
 import fr.vcaen.lyontour.R;
 
@@ -103,6 +110,17 @@ public class PointdinteretDetailFragment extends Fragment {
                 RestHelper.getInstance(getActivity()).getImageLoader());
         }
 
+        LatLng latLng = new LatLng(mItem.getLatitude(), mItem.getLongitude());
+        MapView mv = (MapView) rootView.findViewById(R.id.mapview);
+        mv.setAccessToken("sk.eyJ1Ijoic29uaWFoNDMxMiIsImEiOiJDbGVzMmZJIn0.2Nj61Rz4inJyKYD6MXUsnQ");
+        mv.setTileSource(new MapboxTileLayer("soniah4312.7c398ef3"));
+        mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
+        mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
+        mv.setCenter(latLng);
+        mv.setZoom(16);
+
+        Marker marker = new Marker("titre", "decription", latLng);
+        mv.addMarker(marker);
         return rootView;
     }
 }
